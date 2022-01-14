@@ -1,16 +1,16 @@
-#' @title Banker, Charnes and Cooper programming model with output orientation for a convex Efficiency Analysis Tree model
+#' @title Banker, Charnes and Cooper programming model with output orientation for a Convexified Efficiency Analysis Trees model
 #'
-#' @description Banker, Charnes and Cooper programming model with output orientation for a convex Efficiency Analysis Tree model.
+#' @description Banker, Charnes and Cooper programming model with output orientation for a Convexified Efficiency Analysis Trees model.
 #'
-#' @param j Integer. Number of DMUs.
-#' @param scores Matrix. Empty matrix for scores.
-#' @param x_k Dataframe. Set of input variables.
-#' @param y_k Dataframe. Set of output variables.
-#' @param atreeTk Matrix. Set of "a" Pareto-coordinates.
-#' @param ytreeTk Matrix. Set of predictions.
-#' @param nX Integer. Number of inputs.
-#' @param nY Integer. Number of outputs.
-#' @param N_leaves Integer. Number of leaf nodes. 
+#' @param j Number of DMUs.
+#' @param scores \code{matrix}. Empty matrix for scores.
+#' @param x_k \code{data.frame}. Set of input variables.
+#' @param y_k \code{data.frame} Set of output variables.
+#' @param atreeTk \code{matrix} Set of "a" Pareto-coordinates.
+#' @param ytreeTk \code{matrix} Set of predictions.
+#' @param nX Number of inputs.
+#' @param nY Number of outputs.
+#' @param N_leaves Number of leaf nodes. 
 #'
 #' @importFrom lpSolveAPI make.lp lp.control set.objfn add.constraint set.type set.bounds get.objective
 #'
@@ -46,19 +46,19 @@ CEAT_BCC_out <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves
   return(scores)
 }
 
-#' @title Banker, Charnes and Cooper programming model with input orientation for a convex Efficiency Analysis Tree model
+#' @title Banker, Charnes and Cooper programming model with input orientation for a Convexified Efficiency Analysis Trees model
 #'
-#' @description Banker, Charnes and Cooper programming model with input orientation for a convex Efficiency Analysis Tree model.
+#' @description Banker, Charnes and Cooper programming model with input orientation for a Convexified Efficiency Analysis Trees model.
 #'
-#' @param j Integer. Number of DMUs.
-#' @param scores Matrix. Empty matrix for scores.
-#' @param x_k Dataframe. Set of input variables.
-#' @param y_k Dataframe. Set of output variables.
-#' @param atreeTk Matrix. Set of "a" Pareto-coordinates.
-#' @param ytreeTk Matrix. Set of predictions.
-#' @param nX Integer. Number of inputs.
-#' @param nY Integer. Number of outputs.
-#' @param N_leaves Integer. Number of leaf nodes. 
+#' @param j Number of DMUs.
+#' @param scores \code{matrix}. Empty matrix for scores.
+#' @param x_k \code{data.frame}. Set of input variables.
+#' @param y_k \code{data.frame} Set of output variables.
+#' @param atreeTk \code{matrix} Set of "a" Pareto-coordinates.
+#' @param ytreeTk \code{matrix} Set of predictions.
+#' @param nX Number of inputs.
+#' @param nY Number of outputs.
+#' @param N_leaves Number of leaf nodes.
 #'
 #' @importFrom lpSolveAPI make.lp lp.control set.objfn add.constraint set.type set.bounds get.objective
 #'
@@ -95,19 +95,19 @@ CEAT_BCC_in <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves)
   
 }
 
-#' @title Directional Distance Function mathematical programming model for a convex Efficiency Analysis Tree model
+#' @title Directional Distance Function mathematical programming model for a Convexified Efficiency Analysis Trees model
 #'
-#' @description Directional Distance Function for a convex Efficiency Analysis Tree model.
+#' @description Directional Distance Function for a Convexified Efficiency Analysis Trees model.
 #'
-#' @param j Integer. Number of DMUs.
-#' @param scores Matrix. Empty matrix for scores.
-#' @param x_k Dataframe. Set of input variables.
-#' @param y_k Dataframe. Set of output variables.
-#' @param atreeTk Matrix. Set of "a" Pareto-coordinates.
-#' @param ytreeTk Matrix. Set of predictions.
-#' @param nX Integer. Number of inputs.
-#' @param nY Integer. Number of outputs.
-#' @param N_leaves Integer. Number of leaf nodes.
+#' @param j Number of DMUs.
+#' @param scores \code{matrix}. Empty matrix for scores.
+#' @param x_k \code{data.frame}. Set of input variables.
+#' @param y_k \code{data.frame} Set of output variables.
+#' @param atreeTk \code{matrix} Set of "a" Pareto-coordinates.
+#' @param ytreeTk \code{matrix} Set of predictions.
+#' @param nX Number of inputs.
+#' @param nY Number of outputs.
+#' @param N_leaves Number of leaf nodes.
 #'
 #' @importFrom lpSolveAPI make.lp lp.control set.objfn add.constraint set.type set.bounds get.objective
 #'
@@ -143,19 +143,19 @@ CEAT_DDF <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves) {
   return(scores)
 }
 
-#' @title Russell Model with input orientation for a convex Efficiency Analysis Tree model
+#' @title Russell Model with input orientation for a Convexified Efficiency Analysis Trees model
 #'
-#' @description Russell Model with input orientation for a convex Efficiency Analysis Tree model.
+#' @description Russell Model with input orientation for a Convexified Efficiency Analysis Trees model.
 #'
-#' @param j Integer. Number of DMUs.
-#' @param scores Matrix. Empty matrix for scores.
-#' @param x_k Dataframe. Set of input variables.
-#' @param y_k Dataframe. Set of output variables.
-#' @param atreeTk Matrix. Set of "a" Pareto-coordinates.
-#' @param ytreeTk Matrix. Set of predictions.
-#' @param nX Integer. Number of inputs.
-#' @param nY Integer. Number of outputs.
-#' @param N_leaves Integer. Number of leaf nodes.
+#' @param j Number of DMUs.
+#' @param scores \code{matrix}. Empty matrix for scores.
+#' @param x_k \code{data.frame}. Set of input variables.
+#' @param y_k \code{data.frame} Set of output variables.
+#' @param atreeTk \code{matrix} Set of "a" Pareto-coordinates.
+#' @param ytreeTk \code{matrix} Set of predictions.
+#' @param nX Number of inputs.
+#' @param nY Number of outputs.
+#' @param N_leaves Number of leaf nodes.
 #'
 #' @importFrom lpSolveAPI make.lp lp.control set.objfn add.constraint set.type set.bounds get.objective
 #'
@@ -198,19 +198,19 @@ CEAT_RSL_in <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves)
   
 }
 
-#' @title Russell Model with output orientation for a convex Efficiency Analysis Tree model
+#' @title Russell Model with output orientation for a Convexified Efficiency Analysis Trees model
 #'
-#' @description Russell Model with output orientation for a convex Efficiency Analysis Tree model.
+#' @description Russell Model with output orientation for a Convexified Efficiency Analysis Trees model.
 #'
-#' @param j Integer. Number of DMUs.
-#' @param scores Matrix. Empty matrix for scores.
-#' @param x_k Dataframe. Set of input variables.
-#' @param y_k Dataframe. Set of output variables.
-#' @param atreeTk Matrix. Set of "a" Pareto-coordinates.
-#' @param ytreeTk Matrix. Set of predictions.
-#' @param nX Integer. Number of inputs.
-#' @param nY Integer. Number of outputs.
-#' @param N_leaves Integer. Number of leaf nodes.
+#' @param j Number of DMUs.
+#' @param scores \code{matrix}. Empty matrix for scores.
+#' @param x_k \code{data.frame}. Set of input variables.
+#' @param y_k \code{data.frame} Set of output variables.
+#' @param atreeTk \code{matrix} Set of "a" Pareto-coordinates.
+#' @param ytreeTk \code{matrix} Set of predictions.
+#' @param nX Number of inputs.
+#' @param nY Number of outputs.
+#' @param N_leaves Number of leaf nodes.
 #'
 #' @importFrom lpSolveAPI make.lp lp.control set.objfn add.constraint set.type set.bounds get.objective
 #'
@@ -253,20 +253,20 @@ CEAT_RSL_out <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves
   
 }
 
-#' @title Weighted Additive Model for a convex Efficiency Analysis Tree model
+#' @title Weighted Additive Model for a Convexified Efficiency Analysis Trees model
 #'
-#' @description Weighted Additive Model for a convex Efficiency Analysis Tree model.
+#' @description Weighted Additive Model for a Convexified Efficiency Analysis Trees model.
 #'
-#' @param j Integer. Number of DMUs.
-#' @param scores Matrix. Empty matrix for scores.
-#' @param x_k Dataframe. Set of input variables.
-#' @param y_k Dataframe. Set of output variables.
-#' @param atreeTk Matrix. Set of "a" Pareto-coordinates.
-#' @param ytreeTk Matrix. Set of predictions.
-#' @param nX Integer. Number of inputs.
-#' @param nY Integer. Number of outputs.
-#' @param N_leaves Integer. Number of leaf nodes.
-#' @param weights Character. \code{"MIP"} for Measure of Inefficiency Proportion or \code{"RAM"} for Range Adjusted Measure of Inefficiency.
+#' @param j Number of DMUs.
+#' @param scores \code{matrix}. Empty matrix for scores.
+#' @param x_k \code{data.frame}. Set of input variables.
+#' @param y_k \code{data.frame} Set of output variables.
+#' @param atreeTk \code{matrix} Set of "a" Pareto-coordinates.
+#' @param ytreeTk \code{matrix} Set of predictions.
+#' @param nX Number of inputs.
+#' @param nY Number of outputs.
+#' @param N_leaves Number of leaf nodes.
+#' @param weights \code{"MIP"} for Measure of Inefficiency Proportion or \code{"RAM"} for Range Adjusted Measure of Inefficiency.
 #'
 #' @importFrom lpSolveAPI make.lp lp.control set.objfn add.constraint set.type set.bounds get.objective
 #'
@@ -276,7 +276,10 @@ CEAT_WAM <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves, we
   # Range for RAM measures
   
   if (weights == "RAM") {
-    ranges <- apply(x_k, 2, max) - apply(x_k, 2, min)
+    InputRanges <- apply(x_k, 2, max) - apply(x_k, 2, min)
+    OutputRanges <- apply(y_k, 2, max) - apply(y_k, 2, min)
+    
+    ranges <- c(InputRanges, OutputRanges) / (nX + nY)
   }
   
   for(d in 1:j){
@@ -330,27 +333,27 @@ CEAT_WAM <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves, we
   
 }
 
-#' @title Convex Efficiency Analysis Tree Efficiency Scores
+#' @title Efficiency Scores computed through a Convexified Efficiency Analysis Trees model.
 #'
-#' @description This function calculates the efficiency scores for each DMU through a convex Efficiency Analysis Trees model.
+#' @description This function computes the efficiency scores for each DMU through a Convexified Efficiency Analysis Trees model.
 #' 
-#' @param data Dataframe containing the DMU for which the efficiency score is calculated.
-#' @param x Vector. Column input indexes in data.
-#' @param y Vector. Column output indexes in data.
-#' @param object An EAT object.
+#' @param data \code{data.frame} or \code{matrix} containing the variables in the model.
+#' @param x Column input indexes in \code{data}.
+#' @param y Column output indexes in \code{data}.
+#' @param object An \code{EAT} object.
 #' @param scores_model Mathematical programming model to calculate scores. 
 #' \itemize{
-#' \item{\code{BCC.OUT}} BCC model. Output-oriented.
-#' \item{\code{BCC.INP}}  BCC model. Input-oriented.
-#' \item{\code{DDF}}     Directional Distance Function.
-#' \item{\code{RSL.OUT}} Russell model. Output-oriented.
-#' \item{\code{RSL.INP}}  Russell model. Input-oriented.
-#' \item{\code{WAM.MIP}} Weighted Additive Model. Measure of Inefficiency Proportions.
-#' \item{\code{WAM.RAM}} Weighted Additive Model. Range Adjusted Measure of Inefficiency.
+#' \item{\code{BCC.OUT}} BCC model. Output-oriented. Efficiency level at 1.
+#' \item{\code{BCC.INP}}  BCC model. Input-oriented. Efficiency level at 1.
+#' \item{\code{DDF}}     Directional Distance Function. Efficiency level at 0.
+#' \item{\code{RSL.OUT}} Russell model. Output-oriented. Efficiency level at 1.
+#' \item{\code{RSL.INP}}  Russell model. Input-oriented. Efficiency level at 1.
+#' \item{\code{WAM.MIP}} Weighted Additive Model. Measure of Inefficiency Proportions. Efficiency level at 0.
+#' \item{\code{WAM.RAM}} Weighted Additive Model. Range Adjusted Measure of Inefficiency. Efficiency level at 0.
 #' }
-#' @param digits Integer. Decimal units for scores.
-#' @param DEA Logical. If \code{TRUE}, DEA scores are calculated with the programming model selected in \code{scores_model}
-#' @param na.rm Logical. If \code{TRUE}, \code{NA} rows are omitted.
+#' @param digits Decimal units for scores.
+#' @param DEA \code{logical}. If \code{TRUE}, DEA scores are calculated with the programming model selected in \code{scores_model}
+#' @param na.rm \code{logical}. If \code{TRUE}, \code{NA} rows are omitted.
 #'  
 #' @importFrom dplyr summarise %>%
 #' @importFrom stats median quantile sd
@@ -367,15 +370,14 @@ CEAT_WAM <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves, we
 #'               scores_model = "BCC.OUT", digits = 2, DEA = TRUE, na.rm = TRUE)
 #' }
 #'
-#' @return Dataframe with input variables and efficiency scores through a convex EAT model.
+#' @return \code{data.frame} introduced as argument with efficiency scores computed through a Convexified Efficiency Analysis Trees model.
 efficiencyCEAT <- function(data, x, y, object, 
                            scores_model, digits = 3, DEA = TRUE,
                            na.rm = TRUE) {
   
-  if (class(object) != "EAT"){
-    stop(paste(deparse(substitute(object)), "must be an EAT object"))
-    
-  } 
+  if (!is(object, "EAT")) {
+    stop(paste(deparse(substitute(object)), "must be an EAT object."))
+  }
   
   if (digits < 0) {
     stop(paste('digits =', digits, 'must be greater than 0.'))
@@ -384,13 +386,10 @@ efficiencyCEAT <- function(data, x, y, object,
   if (!scores_model %in% c("BCC.OUT", "BCC.INP", "DDF", 
                            "RSL.OUT", "RSL.INP", "WAM.MIP",
                            "WAM.RAM")){
-    stop(paste(scores_model, "is not available. Please, check help(\"efficiencyEAT\")"))
+    stop(paste(scores_model, "is not available. Please, check help(\"efficiencyCEAT\")"))
   }
   
-  rwn_data <- preProcess(data, x, y, na.rm = na.rm)
-  
-  rwn <- rwn_data[[1]]
-  data <- rwn_data[[2]]
+  data <- preProcess(data, x, y, na.rm = na.rm)
   
   x <- 1:(ncol(data) - length(y))
   y <- (length(x) + 1):ncol(data)
@@ -478,7 +477,7 @@ efficiencyCEAT <- function(data, x, y, object,
 
   scores <- as.data.frame(scores)
   names(scores) <- CEAT_model
-  rownames(scores) <- rwn
+  rownames(scores) <- row.names(data)
   
   descriptive <- scores %>%
     summarise("Model" = "CEAT",
@@ -494,9 +493,9 @@ efficiencyCEAT <- function(data, x, y, object,
   if (DEA == TRUE){
     scores_DEA <- as.data.frame(scores_DEA)
     names(scores_DEA) <- DEA_model
-    rownames(scores_DEA) <- rwn
+    rownames(scores_DEA) <- row.names(data)
     
-    descriptive_DEA <- scores %>%
+    descriptive[2, ] <- scores %>%
       summarise("Model" = "DEA",
                 "Mean" = round(mean(scores_DEA[, 1]), digits),
                 "Std. Dev." = round(sd(scores_DEA[, 1]), digits),
@@ -506,17 +505,12 @@ efficiencyCEAT <- function(data, x, y, object,
                 "Q3" = round(quantile(scores_DEA[, 1])[[3]], digits),
                 "Max" = round(max(scores_DEA[, 1]), digits)
       )
-  }
-  
-  if (DEA == TRUE){
     
     scores_df <- cbind(data, round(scores, digits), round(scores_DEA, digits))
     print(scores_df[, c(ncol(scores_df) - 1, ncol(scores_df))])
     
     cat("\n")
     print(descriptive, row.names = FALSE)
-    cat("\n")
-    print(descriptive_DEA, row.names = FALSE)
     
     invisible(scores_df)
     
@@ -528,7 +522,6 @@ efficiencyCEAT <- function(data, x, y, object,
     cat("\n") 
     print(descriptive, row.names = FALSE)
         
-    
     invisible(scores_df)
     
   }

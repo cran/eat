@@ -19,7 +19,7 @@ functions <- data.frame("Purpose" = c(rep("Model", 2),
                                       rep("Graph", 3),
                                       rep("Calculate efficiency scores", 3), 
                                       rep("Graph efficiency scores", 2),
-                                      rep("Predict", 2), 
+                                      rep("Predict", 1), 
                                       rep("Rank", 2),
                                       rep("Simulation", 2)), 
                         "Function name" = c("EAT", "RFEAT",
@@ -28,11 +28,11 @@ functions <- data.frame("Purpose" = c(rep("Model", 2),
                                             "frontier", "plotEAT", "plotRFEAT",
                                             "efficiencyEAT", "efficiencyCEAT", "efficiencyRFEAT",
                                             "efficiencyDensity", "efficiencyJitter",
-                                            "predictEAT", "predictRFEAT",
+                                            "predict",
                                             "rankingEAT", "rankingRFEAT",
                                             "Y1.sim", "X2Y2.sim"), 
                         "Usage" = c("Apply Efficiency Analysis Trees technique to a data set. Return an EAT object.",
-                                    "Apply Random Forest + Efficiency Analysis Trees technique to a data set. Return a RFEAT object.",
+                                    "Apply Random Forest for Efficiency Analysis Trees technique to a data set. Return a RFEAT object.",
                                     "For an EAT object: print the tree structure of an EAT model. 
                                     For a RFEAT object: print a brief summary of a RFEAT model.",
                                     "For an EAT object: return a summary for the leaf nodes, general information about the model and the error and
@@ -42,7 +42,7 @@ functions <- data.frame("Purpose" = c(rep("Model", 2),
                                     "Return measures of centralization and dispersion with respect to the outputs for the nodes of an EAT model.",
                                     "Tune an EAT model.",
                                     "Tune a RFEAT model.",
-                                    "Plot the estimated frontier through an EAT model in a low dimensional scenario
+                                    "Plot the estimated frontier through an EAT model in a scenario with 1 input and 1 output
                                     (FDH estimated frontier is optional).",
                                     "Plot the tree structure of an EAT model.",
                                     "Shows a line graph with the OOB error on the y-axis, calculated from a forest made up of k trees (x-axis).",
@@ -52,8 +52,7 @@ functions <- data.frame("Purpose" = c(rep("Model", 2),
                                     "Graph a density plot for a data frame of efficiency scores (EAT, FDH, CEAT, DEA and RFEAT are available).",
                                     "Graph a jitter plot for a vector of efficiency scores calculated through an EAT model 
                                     (EAT or CEAT scores are accepted).",
-                                    "Predict the output through an EAT model.",
-                                    "Predict the output through a RFEAT model.",
+                                    "Generic function to predict the output through an EAT or RFEAT model.",
                                     "Calculate variable importance scores through an EAT model.",
                                     "Calculate variable importance scores through a RFEAT model.",
                                     "Simulate a data set in a single output scenario. 1, 3, 6, 9, 12 and 15 inputs can be generated.",
@@ -63,8 +62,8 @@ functions <- data.frame("Purpose" = c(rep("Model", 2),
 kableExtra::kable(functions) %>%
   kableExtra::kable_styling("striped", full_width = F) %>%
   kableExtra::collapse_rows(columns = 1, valign = "middle") %>%
-  kableExtra::row_spec(c(1:2, 8:9, 13:15, 18:19, 22:23), background = "#DBFFD6") %>%
-  kableExtra::row_spec(c(3:7, 10:12, 16:17, 20:21), background = "#FFFFD1") 
+  kableExtra::row_spec(c(1:2, 8:9, 13:15, 18, 21:22), background = "#DBFFD6") %>%
+  kableExtra::row_spec(c(3:7, 10:12, 16:17, 19:20), background = "#FFFFD1") 
 
 ## ----seed---------------------------------------------------------------------
 # We save the seed for reproducibility of the results
@@ -404,8 +403,7 @@ plotRFEAT(forest)
 ## ----rankingRFEAT, eval = FALSE-----------------------------------------------
 #  rankingRFEAT(object,
 #               barplot = TRUE,
-#               digits = 2,
-#  )
+#               digits = 2)
 
 ## ----RFmodel2-----------------------------------------------------------------
 forestReduced <- RFEAT(data = PISAindex, 
@@ -464,11 +462,8 @@ scoresRF <- efficiencyRFEAT(data = PISAindex,
                             object = bestRFEAT_model,
                             FDH = TRUE)
 
-## ----predictEAT, eval = FALSE-------------------------------------------------
-#  predictEAT(object, newdata, x)
-
-## ----predictRFEAT, eval = FALSE-----------------------------------------------
-#  predictRFEAT(object, newdata, x)
+## ----predict, eval = FALSE----------------------------------------------------
+#  predict(object, newdata, x)
 
 ## ----predictions, collapse = FALSE--------------------------------------------
 # bestEAT_model <- EAT(data = PISAindex,
@@ -477,20 +472,20 @@ scoresRF <- efficiencyRFEAT(data = PISAindex,
                      # numStop = 5,
                      # fold = 5)
 
-# bestRFEAT_model <- EAT(data = PISAindex,
-                       # x = c(6, 7, 8, 12, 17),
-                       # y = 3:5,
-                       # numStop = 3,
-                       # m = 30,
-                       # s_mtry = 'BRM')
+# bestRFEAT_model <- RFEAT(data = PISAindex,
+                         # x = c(6, 7, 8, 12, 17),
+                         # y = 3:5,
+                         # numStop = 3,
+                         # m = 30,
+                         # s_mtry = 'BRM')
 
-predictions_EAT <- predictEAT(object = bestEAT_model,
-                              newdata = PISAindex,
-                              x = c(6, 7, 8, 12, 17))
+predictions_EAT <- predict(object = bestEAT_model,
+                           newdata = PISAindex,
+                           x = c(6, 7, 8, 12, 17))
 
-predictions_RFEAT <- predictRFEAT(object = bestRFEAT_model,
-                                  newdata = PISAindex,
-                                  x = c(6, 7, 8, 12, 17))
+predictions_RFEAT <- predict(object = bestRFEAT_model,
+                             newdata = PISAindex,
+                             x = c(6, 7, 8, 12, 17))
 
 ## ----EAT_vs_RFEAT_vs_FDH, collapse = FALSE, echo = FALSE----------------------
 predictions <- cbind(PISAindex[, 3], PISAindex[, 4], PISAindex[, 5], 
@@ -516,7 +511,7 @@ new <- data.frame(NBMC = c(90, 95, 93),
                   HW = c(90, 91, 92),
                   AAE = c(88, 91, 89))
 
-predictions_EAT <- predictEAT(object = bestEAT_model,
-                              newdata = new,
-                              x = 1:5)
+predictions_EAT <- predict(object = bestEAT_model,
+                           newdata = new,
+                           x = 1:5)
 

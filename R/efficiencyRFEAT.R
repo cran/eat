@@ -1,14 +1,14 @@
-#' @title Random Forest + Efficiency Analysis Trees Efficiency Scores
+#' @title Efficiency Scores computed through a Random Forest + Efficiency Analysis Trees model.
 #'
-#' @description This function calculates the efficiency scores for each DMU through a Random Forest + Efficiency Analysis Trees model and the Banker Charnes and Cooper mathematical programming model with output orientation.
+#' @description This function calculates the efficiency scores for each DMU through a Random Forest + Efficiency Analysis Trees model and the Banker Charnes and Cooper mathematical programming model with output orientation. Efficiency level at 1.
 #'
-#' @param data Dataframe for which the efficiency score is calculated.
-#' @param x Vector. Column input indexes in data.
-#' @param y Vector. Column output indexes in data.
-#' @param object A RFEAT object.
-#' @param digits Integer. Decimal units for scores.
-#' @param FDH Logical. If \code{TRUE}, FDH scores are computed.
-#' @param na.rm Logical. If \code{TRUE}, \code{NA} rows are omitted.
+#' @param data \code{data.frame} or \code{matrix} containing the variables in the model.
+#' @param x Column input indexes in \code{data}.
+#' @param y Column output indexes in \code{data}.
+#' @param object A \code{RFEAT} object.
+#' @param digits Decimal units for scores.
+#' @param FDH \code{logical}. If \code{TRUE}, FDH scores are computed.
+#' @param na.rm \code{logical}. If \code{TRUE}, \code{NA} rows are omitted.
 #'
 #' @importFrom dplyr %>% mutate summarise
 #' @importFrom stats median quantile sd
@@ -24,24 +24,19 @@
 #'                 digits = 2, FDH = TRUE, na.rm = TRUE)
 #' }
 #'
-#' @return Dataframe with input variables and efficiency scores through a Random Forest + Efficiency Analysis Trees model.
+#' @return \code{data.frame} introduced as argument with efficiency scores computed through a Random Forest + Efficiency Analysis Trees model.
 efficiencyRFEAT <- function(data, x, y, object, digits = 3, FDH = TRUE, na.rm = TRUE){
   
-  if (class(object) != "RFEAT"){
+  if (!is(object, "RFEAT")) {
     stop(paste(deparse(substitute(object)), "must be a RFEAT object."))
     
-  } 
-  
-  if (digits < 0) {
+    } else if (digits < 0) {
     stop(paste('digits =', digits, 'must be greater than 0.'))
   }
   
   train_names <- c(object[["data"]][["input_names"]], object[["data"]][["output_names"]])
   
-  rwn_data <- preProcess(data, x, y, na.rm = na.rm)
-  
-  rwn <- rwn_data[[1]]
-  data <- rwn_data[[2]]
+  data <- preProcess(data, x, y, na.rm = na.rm)
   
   x <- 1:(ncol(data) - length(y))
   y <- (length(x) + 1):ncol(data)
@@ -76,7 +71,7 @@ efficiencyRFEAT <- function(data, x, y, object, digits = 3, FDH = TRUE, na.rm = 
   
   scoreRF <- as.data.frame(data$scoreRF)
   names(scoreRF) <- "RFEAT_BCC_OUT"
-  rownames(scoreRF) <- rwn
+  rownames(scoreRF) <- row.names(data)
   
   descriptive <- scoreRF %>%
     summarise("Model" = "RFEAT",
@@ -103,9 +98,9 @@ efficiencyRFEAT <- function(data, x, y, object, digits = 3, FDH = TRUE, na.rm = 
     
     scores_FDH <- as.data.frame(scores_FDH)
     names(scores_FDH) <- FDH_model
-    rownames(scores_FDH) <- rwn
+    rownames(scores_FDH) <- row.names(data)
     
-    descriptive_FDH <- scores_FDH %>%
+    descriptive[2, ] <- scores_FDH %>%
       summarise("Model" = "FDH",
                 "Mean" = round(mean(scores_FDH[, 1]), digits),
                 "Std. Dev." = round(sd(scores_FDH[, 1]), digits),
@@ -121,8 +116,6 @@ efficiencyRFEAT <- function(data, x, y, object, digits = 3, FDH = TRUE, na.rm = 
     
     cat("\n")
     print(descriptive, row.names = FALSE)
-    cat("\n")
-    print(descriptive_FDH, row.names = FALSE)
     
     invisible(scores_df)
     
@@ -137,8 +130,6 @@ efficiencyRFEAT <- function(data, x, y, object, digits = 3, FDH = TRUE, na.rm = 
     cat("\n") 
     print(descriptive, row.names = FALSE)
     
-    
     invisible(scores_df)
-    
   }
 }

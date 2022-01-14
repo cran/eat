@@ -1,49 +1,44 @@
-#' @title Data preprocessing
+#' @title Data Preprocessing for Efficiency Analysis Trees
 #'
-#' @description This function displays error messages in relation with data such as presence of NA values, types of data not allowed or arguments entered incorrectly. Also, it prepares the data in the required format.
+#' @description This function arranges the data in the required format and displays error messages.
 #'
-#' @param data Dataframe or matrix containing the variables in the model.
-#' @param x Vector. Column input indexes in data.
-#' @param y Vector. Column output indexes in data.
-#' @param numStop Integer. Minimum number of observations in a node for a split to be attempted.
-#' @param fold Integer. Set of number of folds in which the dataset to apply cross-validation during the pruning is divided.
-#' @param max.depth Integer. Depth of the tree.
-#' @param max.leaves Integer. Maximum number of leaf nodes.
-#' @param na.rm Logical. If \code{TRUE}, \code{NA} rows are omitted.
+#' @param data \code{data.frame} or \code{matrix} containing the variables in the model.
+#' @param x Column input indexes in data.
+#' @param y Column output indexes in data.
+#' @param numStop Minimum number of observations in a node for a split to be attempted.
+#' @param fold Set of number of folds in which the dataset to apply cross-validation during the pruning is divided.
+#' @param max.depth Depth of the tree.
+#' @param max.leaves Maximum number of leaf nodes.
+#' @param na.rm \code{logical}. If \code{TRUE}, \code{NA} rows are omitted.
 #'
 #' @importFrom stats na.omit
 #'
-#' @return List containing rownames and data processed in the [X, Y] format with only categories allowed.
+#' @return It returns a \code{data.frame} in the required format.
 preProcess <- function(data, x, y, numStop = 5, fold = 5, 
                        max.depth = NULL, max.leaves = NULL, 
                        na.rm = TRUE) {
   
   # fold argument bad introduced
-  
   if (!is.null(fold) && fold < 2) {
     stop('fold = ', fold, ' must be greater than or equal 2.')
   }
   
   # numStop argument bad introduced
-  
   if (!is.null(numStop) && numStop < 0) {
     stop('numStop = ', numStop, ' must be greater than or equal 0.')
   }
   
   # max.depth  bad introduced
-  
   if (!is.null(max.depth) && max.depth <= 0) {
     stop('max.depth = ', max.depth, ' must be greater than 0.')
   }
   
   # max.leaves bad introduced
-  
   if (!is.null(max.leaves) && max.leaves <= 0) {
     stop('max.leaves = ', max.leaves, ' must be greater than 0.')
   }
   
   # x and y well / bad introduced
-  
   cols <- 1:length(data)
   if (!(all(x %in% cols) && all(y %in% cols))) {
     stop("x or y indexes are not in data.")
@@ -52,11 +47,8 @@ preProcess <- function(data, x, y, numStop = 5, fold = 5,
   # Dataframe
   # List with variables
   # Matix
-  
   if (is.list(data) && !is.data.frame(data)){
-    
     # Data names?
-    
     ifelse(is.null(names(data)), 
            nms <- 1:length(data), # if not 1:x
            nms <- names(data))
@@ -65,7 +57,6 @@ preProcess <- function(data, x, y, numStop = 5, fold = 5,
     names(data) <- nms
     
   } else if (is.matrix(data) || is.data.frame(data)) {
-    
     data <- data.frame(data)
   }
   
@@ -101,7 +92,6 @@ preProcess <- function(data, x, y, numStop = 5, fold = 5,
   data <- data[, c(x, y)]
   
   # NA values
-
   if (any(is.na(data))){
     if (na.rm == T){
       data <- na.omit(data)
@@ -112,9 +102,7 @@ preProcess <- function(data, x, y, numStop = 5, fold = 5,
     }
   }
   
-  rwn <- row.names(data)
-  
-  return(list(rwn, data))
+  return(data)
 }
 
 

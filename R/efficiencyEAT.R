@@ -1,21 +1,22 @@
 #' @title Banker, Charnes and Cooper Programming Model with Output Orientation for an Efficiency Analysis Trees model
 #'
-#' @description Banker, Charnes and Cooper programming model with output orientation for an Efficiency Analysis Tree model.
+#' @description Banker, Charnes and Cooper programming model with output orientation for an Efficiency Analysis Trees model.
 #'
-#' @param j Integer. Number of DMUs.
-#' @param scores Matrix. Empty matrix for scores.
-#' @param x_k Dataframe. Set of input variables.
-#' @param y_k Dataframe. Set of output variables.
-#' @param atreeTk Matrix. Set of "a" Pareto-coordinates.
-#' @param ytreeTk Matrix. Set of predictions.
-#' @param nX Integer. Number of inputs.
-#' @param nY Integer. Number of outputs.
-#' @param N_leaves Integer. Number of leaf nodes. 
+#' @param j Number of DMUs.
+#' @param scores \code{matrix}. Empty matrix for scores.
+#' @param x_k \code{data.frame}. Set of input variables.
+#' @param y_k \code{data.frame} Set of output variables.
+#' @param atreeTk \code{matrix} Set of "a" Pareto-coordinates.
+#' @param ytreeTk \code{matrix} Set of predictions.
+#' @param nX Number of inputs.
+#' @param nY Number of outputs.
+#' @param N_leaves Number of leaf nodes. 
 #'
 #' @importFrom lpSolveAPI make.lp lp.control set.objfn add.constraint set.type set.bounds get.objective
 #'
 #' @return A numerical vector with efficiency scores.
 EAT_BCC_out <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves) {
+  
   for(d in 1:j){
     
     objVal <- matrix(ncol = N_leaves + 1, nrow = 1)
@@ -51,17 +52,17 @@ EAT_BCC_out <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves)
 
 #' @title Banker, Charnes and Cooper Programming Model with Input Orientation for an Efficiency Analysis Trees model
 #'
-#' @description Banker, Charnes and Cooper programming model with input orientation for an Efficiency Analysis Tree model.
+#' @description Banker, Charnes and Cooper programming model with input orientation for an Efficiency Analysis Trees model.
 #'
-#' @param j Integer. Number of DMUs.
-#' @param scores Matrix. Empty matrix for scores.
-#' @param x_k Dataframe. Set of input variables.
-#' @param y_k Dataframe. Set of output variables.
-#' @param atreeTk Matrix. Set of "a" Pareto-coordinates.
-#' @param ytreeTk Matrix. Set of predictions.
-#' @param nX Integer. Number of inputs.
-#' @param nY Integer. Number of outputs.
-#' @param N_leaves Integer. Number of leaf nodes. 
+#' @param j Number of DMUs.
+#' @param scores \code{matrix}. Empty matrix for scores.
+#' @param x_k \code{data.frame}. Set of input variables.
+#' @param y_k \code{data.frame} Set of output variables.
+#' @param atreeTk \code{matrix} Set of "a" Pareto-coordinates.
+#' @param ytreeTk \code{matrix} Set of predictions.
+#' @param nX Number of inputs.
+#' @param nY Number of outputs.
+#' @param N_leaves Number of leaf nodes. 
 #'
 #' @importFrom lpSolveAPI make.lp lp.control set.objfn add.constraint set.type set.bounds get.objective
 #'
@@ -103,17 +104,17 @@ EAT_BCC_in <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves) 
 
 #' @title Directional Distance Function Programming Model for an Efficiency Analysis Trees model
 #'
-#' @description Directional Distance Function for an Efficiency Analysis Tree model.
+#' @description Directional Distance Function for an Efficiency Analysis Trees model.
 #'
-#' @param j Integer. Number of DMUs.
-#' @param scores Matrix. Empty matrix for scores.
-#' @param x_k Dataframe. Set of input variables.
-#' @param y_k Dataframe. Set of output variables.
-#' @param atreeTk Matrix. Set of "a" Pareto-coordinates.
-#' @param ytreeTk Matrix. Set of predictions.
-#' @param nX Integer. Number of inputs.
-#' @param nY Integer. Number of outputs.
-#' @param N_leaves Integer. Number of leaf nodes.
+#' @param j Number of DMUs.
+#' @param scores \code{matrix}. Empty matrix for scores.
+#' @param x_k \code{data.frame}. Set of input variables.
+#' @param y_k \code{data.frame} Set of output variables.
+#' @param atreeTk \code{matrix} Set of "a" Pareto-coordinates.
+#' @param ytreeTk \code{matrix} Set of predictions.
+#' @param nX Number of inputs.
+#' @param nY Number of outputs.
+#' @param N_leaves Number of leaf nodes. 
 #'
 #' @importFrom lpSolveAPI make.lp lp.control set.objfn add.constraint set.type set.bounds get.objective
 #'
@@ -156,15 +157,15 @@ EAT_DDF <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves) {
 #'
 #' @description Russell Model with input orientation for an Efficiency Analysis Trees model.
 #'
-#' @param j Integer. Number of DMUs.
-#' @param scores Matrix. Empty matrix for scores.
-#' @param x_k Dataframe. Set of input variables.
-#' @param y_k Dataframe. Set of output variables.
-#' @param atreeTk Matrix. Set of "a" Pareto-coordinates.
-#' @param ytreeTk Matrix. Set of predictions.
-#' @param nX Integer. Number of inputs.
-#' @param nY Integer. Number of outputs.
-#' @param N_leaves Integer. Number of leaf nodes.
+#' @param j Number of DMUs.
+#' @param scores \code{matrix}. Empty matrix for scores.
+#' @param x_k \code{data.frame}. Set of input variables.
+#' @param y_k \code{data.frame} Set of output variables.
+#' @param atreeTk \code{matrix} Set of "a" Pareto-coordinates.
+#' @param ytreeTk \code{matrix} Set of predictions.
+#' @param nX Number of inputs.
+#' @param nY Number of outputs.
+#' @param N_leaves Number of leaf nodes. 
 #'
 #' @importFrom lpSolveAPI make.lp lp.control set.objfn add.constraint set.type set.bounds get.objective
 #'
@@ -212,17 +213,17 @@ EAT_RSL_in <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves) 
 
 #' @title Russell Model with Output Orientation for an Efficiency Analysis Trees model
 #'
-#' @description Russell Model with output orientation for an Efficiency Analysis Tree model.
+#' @description Russell Model with output orientation for an Efficiency Analysis Trees model.
 #'
-#' @param j Integer. Number of DMUs.
-#' @param scores Matrix. Empty matrix for scores.
-#' @param x_k Dataframe. Set of input variables.
-#' @param y_k Dataframe. Set of output variables.
-#' @param atreeTk Matrix. Set of "a" Pareto-coordinates.
-#' @param ytreeTk Matrix. Set of predictions.
-#' @param nX Integer. Number of inputs.
-#' @param nY Integer. Number of outputs.
-#' @param N_leaves Integer. Number of leaf nodes.
+#' @param j Number of DMUs.
+#' @param scores \code{matrix}. Empty matrix for scores.
+#' @param x_k \code{data.frame}. Set of input variables.
+#' @param y_k \code{data.frame} Set of output variables.
+#' @param atreeTk \code{matrix} Set of "a" Pareto-coordinates.
+#' @param ytreeTk \code{matrix} Set of predictions.
+#' @param nX Number of inputs.
+#' @param nY Number of outputs.
+#' @param N_leaves Number of leaf nodes. 
 #'
 #' @importFrom lpSolveAPI make.lp lp.control set.objfn add.constraint set.type set.bounds get.objective
 #'
@@ -272,15 +273,15 @@ EAT_RSL_out <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves)
 #'
 #' @description Weighted Additive Model for an Efficiency Analysis Trees model.
 #'
-#' @param j Integer. Number of DMUs.
-#' @param scores Matrix. Empty matrix for scores.
-#' @param x_k Dataframe. Set of input variables.
-#' @param y_k Dataframe. Set of output variables.
-#' @param atreeTk Matrix. Set of "a" Pareto-coordinates.
-#' @param ytreeTk Matrix. Set of predictions.
-#' @param nX Integer. Number of inputs.
-#' @param nY Integer. Number of outputs.
-#' @param N_leaves Integer. Number of leaf nodes.
+#' @param j Number of DMUs.
+#' @param scores \code{matrix}. Empty matrix for scores.
+#' @param x_k \code{data.frame}. Set of input variables.
+#' @param y_k \code{data.frame} Set of output variables.
+#' @param atreeTk \code{matrix} Set of "a" Pareto-coordinates.
+#' @param ytreeTk \code{matrix} Set of predictions.
+#' @param nX Number of inputs.
+#' @param nY Number of outputs.
+#' @param N_leaves Number of leaf nodes. 
 #' @param weights Character. \code{"MIP"} for Measure of Inefficiency Proportion or \code{"RAM"} for Range Adjusted Measure of Inefficiency.
 #'
 #' @importFrom lpSolveAPI make.lp lp.control set.objfn add.constraint set.type set.bounds get.objective
@@ -289,9 +290,11 @@ EAT_RSL_out <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves)
 EAT_WAM <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves, weights) {
   
   # Range for RAM measures
-  
   if (weights == "RAM") {
-    ranges <- apply(x_k, 2, max) - apply(x_k, 2, min)
+    InputRanges <- apply(x_k, 2, max) - apply(x_k, 2, min)
+    OutputRanges <- apply(y_k, 2, max) - apply(y_k, 2, min)
+    
+    ranges <- c(InputRanges, OutputRanges) / (nX + nY)
   }
   
   for(d in 1:j){
@@ -299,11 +302,11 @@ EAT_WAM <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves, wei
     objVal <- matrix(ncol = nX + nY + N_leaves, nrow = 1)
     
     if (weights == "MIP") {
-      objVal[1:(nX + nY)] <- c(1 / x_k[d, ], 1 / y_k[d, ]) 
+      objVal[1:(nX + nY)] <- c(1 / x_k[d, ], 1 / y_k[d, ])
       
     } else if (weights == "RAM"){
       objVal[1:(nX + nY)] <- ranges
-      
+
     }
     
     # structure for lpSolve
@@ -320,7 +323,7 @@ EAT_WAM <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves, wei
       vec[(nX + 1):(nX + nY)] <- 0
       vec[(nX + nY + 1):(nY + nX + N_leaves)] <- atreeTk[, xi]
       
-      add.constraint(lps, xt = vec, "<=",  rhs = x_k[d, xi])
+      add.constraint(lps, xt = vec, "=",  rhs = x_k[d, xi])
     }
     
     for(yi in 1:nY)
@@ -331,11 +334,12 @@ EAT_WAM <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves, wei
       vec[((nX + 1):(nX + nY))[- yi]] <- 0
       vec[(nX + nY + 1):(nY + nX + N_leaves)] <- ytreeTk[, yi]
       
-      add.constraint(lps, xt = vec, ">=", rhs = y_k[d, yi])
+      add.constraint(lps, xt = vec, "=", rhs = y_k[d, yi])
     }
     
     # Constrain 2.3 - lambda = 1
-    add.constraint(lprec = lps, xt = c(rep(0, nY + nX), rep(1, N_leaves)), type = "=", rhs = 1)
+    add.constraint(lprec = lps, xt = c(rep(0, nY + nX), rep(1, N_leaves)), 
+                   type = "=", rhs = 1)
     
     # Constrain 2.4
     set.type(lps, columns = 1:N_leaves + (nX + nY), type = c("binary"))
@@ -348,27 +352,27 @@ EAT_WAM <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves, wei
   
 }
 
-#' @title Efficiency Analysis Trees Efficiency Scores
+#' @title Efficiency Scores computed through an Efficiency Analysis Trees model.
 #'
 #' @description This function calculates the efficiency scores for each DMU by an Efficiency Analysis Trees model.
 #' 
-#' @param data Dataframe containing the DMU for which the efficiency score is calculated.
-#' @param x Vector. Column input indexes in data.
-#' @param y Vector. Column output indexes in data.
-#' @param object An EAT object.
+#' @param data \code{data.frame} or \code{matrix} containing the variables in the model.
+#' @param x Column input indexes in \code{data}.
+#' @param y Column output indexes in \code{data}.
+#' @param object An \code{EAT} object.
 #' @param scores_model Mathematical programming model to calculate scores. 
 #' \itemize{
-#' \item{\code{BCC.OUT}} BCC model. Output-oriented.
-#' \item{\code{BCC.INP}}  BCC model. Input-oriented.
-#' \item{\code{DDF}}     Directional Distance Function.
-#' \item{\code{RSL.OUT}} Russell model. Output-oriented.
-#' \item{\code{RSL.INP}}  Russell model. Input-oriented.
-#' \item{\code{WAM.MIP}} Weighted Additive Model. Measure of Inefficiency Proportions.
-#' \item{\code{WAM.RAM}} Weighted Additive Model. Range Adjusted Measure of Inefficiency.
+#' \item{\code{BCC.OUT}} BCC model. Output-oriented. Efficiency level at 1.
+#' \item{\code{BCC.INP}}  BCC model. Input-oriented. Efficiency level at 1.
+#' \item{\code{DDF}}     Directional Distance Function. Efficiency level at 0.
+#' \item{\code{RSL.OUT}} Russell model. Output-oriented. Efficiency level at 1.
+#' \item{\code{RSL.INP}}  Russell model. Input-oriented. Efficiency level at 1.
+#' \item{\code{WAM.MIP}} Weighted Additive Model. Measure of Inefficiency Proportions. Efficiency level at 0.
+#' \item{\code{WAM.RAM}} Weighted Additive Model. Range Adjusted Measure of Inefficiency. Efficiency level at 0.
 #' }
-#' @param digits Integer. Decimal units for scores.
-#' @param FDH Logical. If \code{TRUE}, FDH scores are also calculated with the programming model selected in \code{scores_model}.
-#' @param na.rm Logical. If \code{TRUE}, \code{NA} rows are omitted.
+#' @param digits Decimal units for scores.
+#' @param FDH \code{logical}. If \code{TRUE}, FDH scores are also computed with the programming model selected in \code{scores_model}.
+#' @param na.rm \code{logical}. If \code{TRUE}, \code{NA} rows are omitted.
 #'  
 #' @importFrom dplyr summarise %>%
 #' @importFrom stats median quantile sd
@@ -385,15 +389,14 @@ EAT_WAM <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves, wei
 #'               scores_model = "BCC.OUT", digits = 2, FDH = TRUE, na.rm = TRUE)
 #' }
 #' 
-#' @return Dataframe introduced as argument with efficiency scores calculated through an Efficiency Analysis Trees model.
+#' @return \code{data.frame} introduced as argument with efficiency scores computed through an Efficiency Analysis Trees model.
 efficiencyEAT <- function(data, x, y, object, 
                           scores_model, digits = 3, FDH = TRUE,
                           na.rm = TRUE) {
   
-  if (class(object) != "EAT"){
+  if (!is(object, "EAT")) {
     stop(paste(deparse(substitute(object)), "must be an EAT object."))
-    
-  } 
+  }
   
   if (digits < 0) {
     stop(paste('digits =', digits, 'must be greater than 0.'))
@@ -405,10 +408,7 @@ efficiencyEAT <- function(data, x, y, object,
     stop(paste(scores_model, "is not available. Please, check help(\"efficiencyEAT\")"))
   }
   
-  rwn_data <- preProcess(data, x, y, na.rm = na.rm)
-  
-  rwn <- rwn_data[[1]]
-  data <- rwn_data[[2]]
+  data <- preProcess(data, x, y, na.rm = na.rm)
   
   x <- 1:(ncol(data) - length(y))
   y <- (length(x) + 1):ncol(data)
@@ -418,7 +418,7 @@ efficiencyEAT <- function(data, x, y, object,
   if (!identical(sort(train_names), sort(names(data)))) {
     stop("Different variable names in training and data set")
   }
-
+  
   j <- nrow(data)
   scores <- matrix(nrow = j, ncol = 1)
   x_k <- as.matrix(data[, x])
@@ -496,7 +496,7 @@ efficiencyEAT <- function(data, x, y, object,
 
   scores <- as.data.frame(scores)
   names(scores) <- EAT_model
-  rownames(scores) <- rwn
+  rownames(scores) <- row.names(data)
   
   descriptive <- scores %>%
     summarise("Model" = "EAT",
@@ -513,9 +513,9 @@ efficiencyEAT <- function(data, x, y, object,
     
     scores_FDH <- as.data.frame(scores_FDH)
     names(scores_FDH) <- FDH_model
-    rownames(scores_FDH) <- rwn
+    rownames(scores_FDH) <- row.names(data)
     
-    descriptive_FDH <- scores_FDH %>%
+    descriptive[2, ] <- scores_FDH %>%
       summarise("Model" = "FDH",
                 "Mean" = round(mean(scores_FDH[, 1]), digits),
                 "Std. Dev." = round(sd(scores_FDH[, 1]), digits),
@@ -531,8 +531,6 @@ efficiencyEAT <- function(data, x, y, object,
     
     cat("\n")
     print(descriptive, row.names = FALSE)
-    cat("\n")
-    print(descriptive_FDH, row.names = FALSE)
     
     invisible(scores_df)
     
@@ -545,6 +543,5 @@ efficiencyEAT <- function(data, x, y, object,
     print(descriptive, row.names = FALSE)
         
     invisible(scores_df)
-    
   }
 }

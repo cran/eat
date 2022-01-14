@@ -164,16 +164,16 @@ M_Breiman <- function(object, digits) {
   return(m)
 }
 
-#' @title Ranking of Variables by Efficiency Analysis Trees
+#' @title Ranking of Variables by Efficiency Analysis Trees model.
 #'
-#' @description This function calculates variable importance through an Efficiency Analysis Trees model.
+#' @description This function computes the variable importance through an Efficiency Analysis Trees model.
 #'
-#' @param object An EAT object.
-#' @param barplot Logical. If \code{TRUE}, a barplot with the importance scores is displayed.
-#' @param threshold Numeric. Importance score value in which a line is graphed.
-#' @param digits Integer. Decimal units.
+#' @param object An \code{EAT} object.
+#' @param barplot \code{logical}. If \code{TRUE}, a barplot with the importance scores is displayed.
+#' @param threshold Importance score value in which a line is graphed.
+#' @param digits Decimal units.
 #'
-#' @return Dataframe with the importance scores. If \code{barplot = TRUE}, it is returned a list containing the scores and the barplot.
+#' @return \code{data.frame} with the importance scores and a barplot representing the the variable importance if \code{barplot = TRUE}.
 #' 
 #' @examples
 #' \donttest{
@@ -189,21 +189,18 @@ M_Breiman <- function(object, digits) {
 #' @export   
 rankingEAT <- function(object, barplot = TRUE, threshold = 70, digits = 2) {
   
-  if (class(object) != "EAT") {
+  if (!is(object, "EAT")) {
     stop(paste(deparse(substitute(object)), "must be an EAT object."))
-    
-  } 
   
-  if (threshold < 0) {
+  } else if (threshold < 0) {
     stop(paste('threshold =', threshold, 'must be greater than 0.'))
-  }
-  
-  if (digits < 0) {
+    
+  } else if (digits < 0) {
     stop(paste('digits =', digits, 'must be greater than 0.'))
-  }
   
-  if(length(object[["data"]][["x"]]) < 2){
+  } else if(length(object[["data"]][["x"]]) < 2) {
     stop("More than two predictors are necessary.")
+    
   }
   
   scores <- M_Breiman(object = object, digits = digits)
@@ -215,5 +212,4 @@ rankingEAT <- function(object, barplot = TRUE, threshold = 70, digits = 2) {
   } else {
     return(scores)
   }
-
 }

@@ -4,14 +4,14 @@
 #' 
 #' @name EAT
 #'
-#' @param data Data frame or matrix containing the variables in the model.
-#' @param x Vector. Column input indexes in data.
-#' @param y Vector. Column output indexes in data.
-#' @param numStop Integer. Minimum number of observations in a node for a split to be attempted.
-#' @param fold Integer. Set of number of folds in which the dataset to apply cross-validation during the pruning is divided.
-#' @param max.depth Integer. Depth of the tree.
-#' @param max.leaves Integer. Maximum number of leaf nodes.
-#' @param na.rm Logical. If \code{TRUE}, \code{NA} rows are omitted.
+#' @param data \code{data.frame} or \code{matrix} containing the variables in the model.
+#' @param x Column input indexes in data.
+#' @param y Column output indexes in data.
+#' @param numStop Minimum number of observations in a node for a split to be attempted.
+#' @param fold Set of number of folds in which the dataset to apply cross-validation during the pruning is divided.
+#' @param max.depth Depth of the tree.
+#' @param max.leaves Maximum number of leaf nodes.
+#' @param na.rm \code{logical}. If \code{TRUE}, \code{NA} rows are omitted.
 #'
 #' @details The EAT function generates a regression tree model based on CART \insertCite{breiman1984}{eat} under a new approach that guarantees obtaining a stepped production frontier that fulfills the property of free disposability. This frontier shares the aforementioned aspects with the FDH frontier \insertCite{deprins1984}{eat} but enhances some of its disadvantages such as the overfitting problem or the underestimation of technical inefficiency. More details in \insertCite{esteve2020;textual}{eat}.
 #'
@@ -26,7 +26,7 @@
 #' @importFrom conflicted conflict_prefer
 #' @importFrom Rdpack reprompt
 #' 
-#' @return An EAT object containing:
+#' @return An \code{EAT} object containing:
 #' \itemize{
 #'   \item{\code{data} \itemize{
 #'                       \item{\code{df}}: data frame containing the variables in the model.
@@ -82,19 +82,20 @@ EAT <- function(data, x, y, numStop = 5, fold = 5,
                 na.rm = TRUE) {
   conflict_prefer("filter", "dplyr")
   
-  # max.depth and max.leaves included
+  # max.depth and max.leaves included at the same time
   if(!is.null(max.depth) && !is.null(max.leaves)) {
     warning(paste("If max.depth and max.leaves arguments are included, only max.depth is used."))
   }
+  
+  # Rownames
+  rwn <- row.names(data)
   
   # Data in data[x, y] format and rownames
   data <- preProcess(data = data, x = x, y = y, numStop = numStop,
                      fold = fold, max.depth = max.depth, max.leaves = max.leaves, 
                      na.rm = na.rm)
   
-  rwn <- data[[1]]
-  
-  data <- data[[2]] %>%
+  data <- data %>%
     mutate(id = row_number())
   
   # Size data
@@ -152,11 +153,11 @@ EAT <- function(data, x, y, numStop = 5, fold = 5,
 
 #' @title Deep Efficiency Analysis Trees
 #'
-#' @description This function creates a deep tree and a set of possible prunings by pruning through the weakest-link pruning procedure.
+#' @description This function creates a deep Efficiency Analysis Tree and a set of possible prunings by the weakest-link pruning procedure.
 #'
-#' @param data Dataframe or matrix containing the variables in the model.
-#' @param x Vector. Column input indexes in data.
-#' @param y Vector. Column output indexes in data.
+#' @param data \code{data.frame} or \code{matrix} containing the variables in the model.
+#' @param x Column input indexes in data.
+#' @param y Column output indexes in data.
 #' @param numStop Integer. Minimum number of observations in a node for a split to be attempted.
 #' @param max.depth Integer. Depth of the tree.
 #' @param max.leaves Integer. Maximum number of leaf nodes.
@@ -277,6 +278,10 @@ deepEAT <- function(data, x, y, numStop = 5, max.depth = NULL, max.leaves = NULL
 #' @export
 print.EAT <- function(x, ...) {
   
+  if (!inherits(x, "EAT")){
+    stop(paste(deparse(substitute(x)), "must be an EAT object"))
+  }
+  
   tree <- x[["tree"]]
   input_names <- x[["data"]][["input_names"]]
   
@@ -344,6 +349,10 @@ print.EAT <- function(x, ...) {
 #' 
 #' @export
 summary.EAT <- function(object, ...) {
+  
+  if (!inherits(object, "EAT")){
+    stop(paste(deparse(substitute(object)), "must be an EAT object"))
+  }
   
   results <- object[["nodes_df"]] %>%
     filter(SL == -1) %>%
@@ -454,9 +463,9 @@ summary.EAT <- function(object, ...) {
 
 #' @title Efficiency Analysis Trees Size
 #' 
-#' @description  This function returns the number of leaf nodes at the tree.
+#' @description This function returns the number of leaf nodes at the tree.
 #'
-#' @param object An EAT object.
+#' @param object An \code{EAT} object.
 #' 
 #' @return Print with the number of leaf nodes at the tree.
 #' 
@@ -469,6 +478,10 @@ summary.EAT <- function(object, ...) {
 #' @export
 size <- function(object) {
   
+  if (!is(object, "EAT")) {
+    stop(paste(deparse(substitute(object)), "must be an EAT object."))
+  }
+  
   size <- object[["model"]][["leaf_nodes"]]
   
   cat(paste('The number of leaf nodes of the EAT model is:', size))
@@ -479,9 +492,9 @@ size <- function(object) {
 #'
 #' @description This function returns the frontier output levels of an Efficiency Analysis Trees model.
 #'
-#' @param object An EAT object.
+#' @param object An \code{EAT} object.
 #' 
-#' @return Data frame with the frontier output levels at the leaf nodes.
+#' @return \code{data.frame} with the frontier output levels at the leaf nodes.
 #' 
 #' @examples
 #' 
@@ -491,6 +504,10 @@ size <- function(object) {
 #' 
 #' @export
 frontier.levels <- function(object) {
+  
+  if (!is(object, "EAT")) {
+    stop(paste(deparse(substitute(object)), "must be an EAT object."))
+  }
   
   frontier.levels <- as.data.frame(unique(object[["model"]][["y"]]))
   colnames(frontier.levels) <- object[["data"]][["output_names"]]
@@ -505,9 +522,9 @@ frontier.levels <- function(object) {
 #'
 #' @description This function returns a set of common measures for the leaf nodes of an Efficiency Analysis Trees model. 
 #' 
-#' @param object An EAT object.
+#' @param object An \code{EAT} object.
 #' 
-#' @return List with centralization and dispersion measures and the root mean square error (RMSE) for each node. In case of a single output, the result of the function is a data frame. 
+#' @return List with centralization and dispersion measures and the root mean squared error (RMSE) for each node. In case of a single output, the result of the function is a \code{data.frame}. 
 #' 
 #' 
 #' @importFrom stats median sd
@@ -519,6 +536,10 @@ frontier.levels <- function(object) {
 #' 
 #' @export
 descrEAT <- function(object) {
+  
+  if (!is(object, "EAT")) {
+    stop(paste(deparse(substitute(object)), "must be an EAT object."))
+  }
   
   data <- object[["data"]][["df"]]
   x <- object[["data"]][["x"]]
@@ -593,5 +614,4 @@ descrEAT <- function(object) {
   }
   
   return(descriptive)
-  
 }

@@ -37,9 +37,8 @@
 frontier <- function(object, FDH = FALSE, observed.data = FALSE, observed.color = "black", 
                      pch = 19, size = 1, rwn = FALSE, max.overlaps = 10){
   
-  if (class(object) != "EAT"){
+  if (!is(object, "EAT")){
     stop(paste(deparse(substitute(object)), "must be an EAT object"))
-    
   } 
 
   t_data <- object[["data"]][["df"]]

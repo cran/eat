@@ -23,7 +23,7 @@ functions <- data.frame("Purpose" = c(rep("Model", 2),
                                       rep("Rank", 2),
                                       rep("Simulation", 2)), 
                         "Function name" = c("EAT", "RFEAT",
-                                            "print", "summary", "size", "frontier.levels", "descrEAT",
+                                            "print", "summary", "EAT_size", "EAT_frontier_levels", "EAT_leaf_stats",
                                             "bestEAT", "bestRFEAT", 
                                             "frontier", "plotEAT", "plotRFEAT",
                                             "efficiencyEAT", "efficiencyCEAT", "efficiencyRFEAT",
@@ -31,39 +31,33 @@ functions <- data.frame("Purpose" = c(rep("Model", 2),
                                             "predict",
                                             "rankingEAT", "rankingRFEAT",
                                             "Y1.sim", "X2Y2.sim"), 
-                        "Usage" = c("Apply Efficiency Analysis Trees technique to a data set. Return an EAT object.",
-                                    "Apply Random Forest for Efficiency Analysis Trees technique to a data set. Return a RFEAT object.",
-                                    "For an EAT object: print the tree structure of an EAT model. 
-                                    For a RFEAT object: print a brief summary of a RFEAT model.",
-                                    "For an EAT object: return a summary for the leaf nodes, general information about the model and the error and
-                                    threshold for each split and surrogate split.",
-                                    "Return the number of leaf nodes for an EAT model.",
-                                    "Return the frontier output levels at the leaf nodes for an EAT model.",
-                                    "Return measures of centralization and dispersion with respect to the outputs for the nodes of an EAT model.",
-                                    "Tune an EAT model.",
-                                    "Tune a RFEAT model.",
-                                    "Plot the estimated frontier through an EAT model in a scenario with 1 input and 1 output
-                                    (FDH estimated frontier is optional).",
-                                    "Plot the tree structure of an EAT model.",
-                                    "Shows a line graph with the OOB error on the y-axis, calculated from a forest made up of k trees (x-axis).",
-                                    "Calculate DMU efficiency scores through an EAT (and optionally through a FDH) model.",
-                                    "Calculate DMU efficiency scores through a convex EAT (and optionally through a DEA) model.",
-                                    "Calculate DMU efficiency scores through a RFEAT (and optionally through a FDH) model.",
-                                    "Graph a density plot for a data frame of efficiency scores (EAT, FDH, CEAT, DEA and RFEAT are available).",
-                                    "Graph a jitter plot for a vector of efficiency scores calculated through an EAT model 
-                                    (EAT or CEAT scores are accepted).",
-                                    "Generic function to predict the output through an EAT or RFEAT model.",
-                                    "Calculate variable importance scores through an EAT model.",
-                                    "Calculate variable importance scores through a RFEAT model.",
-                                    "Simulate a data set in a single output scenario. 1, 3, 6, 9, 12 and 15 inputs can be generated.",
-                                    "Simulate a data set in a scenario with 2 inputs and 2 outputs.")
+                        "Usage" = c("It generates a pruned Efficiency Analysis Trees model and returns an `EAT` object.",
+                                    "It generates a Random Forest for Efficiency Analysis Trees model and returns a `RFEAT` object",
+                                    "Print method for an `EAT` or a `RFEAT` object.",
+                                    "Summary method for an `EAT` object.",
+                                    "For an `EAT` object. It returns the number of leaf nodes.",
+                                    "For an `EAT` object. It returns the frontier output levels at the leaf nodes.",
+                                    "For an `EAT` object. It returns a descriptive summary statistics table for each output variable calculated from the leaf nodes observations.",
+                                    "For an EAT model. Hyperparameter tuning.",
+                                    "For an RFEAT model Hyperparameter tuning.",
+                                    "For an `EAT` object. It plots the estimated frontier in a two-dimensional scenario (1 input and 1 output).",
+                                    "For an `EAT` object. It plots the tree structure.",
+                                    "For an `RFEAT` object. It plots a line plot graph with the Out-of-Bag (OOB) error for a forest consisting of k trees.",
+                                    "It calculates the efficiency scores through an EAT (and FDH) model.",
+                                    "It calculates the efficiency scores through a convexified EAT (and DEA) model.",
+                                    "It calculates the efficiency scores through a RFEAT (and FDH) model.",
+                                    "Density plot for a `data.frame` of efficiency scores (EAT, FDH, CEAT, DEA and RFEAT are available).",
+                                    "For an `EAT` object. Jitter plot for a vector of efficiency scores calculated through an EAT /CEAT model. ",
+                                    "Predict method for an `EAT` or a `RFEAT` object.",
+                                    "For an `EAT` object. It calculates variable importance scores.",
+                                    "For an `RFEAT` object. It calculates variable importance scores.",
+                                    "It simulates a data set in 1 output scenario. 1, 3, 6, 9, 12 and 15 inputs can be generated.",
+                                    "It simulates a data set in 2 outputs and 2 inputs scenario.")
 )
 
 kableExtra::kable(functions) %>%
   kableExtra::kable_styling("striped", full_width = F) %>%
-  kableExtra::collapse_rows(columns = 1, valign = "middle") %>%
-  kableExtra::row_spec(c(1:2, 8:9, 13:15, 18, 21:22), background = "#DBFFD6") %>%
-  kableExtra::row_spec(c(3:7, 10:12, 16:17, 19:20), background = "#FFFFD1") 
+  kableExtra::collapse_rows(columns = 1, valign = "middle")
 
 ## ----seed---------------------------------------------------------------------
 # We save the seed for reproducibility of the results
@@ -93,22 +87,19 @@ print(single_model)
 summary(single_model)
 
 ## ----size.single.output, collapse = FALSE-------------------------------------
-size(single_model)
+EAT_size(single_model)
 
 ## ----frt.single.output, collapse = FALSE--------------------------------------
-frontier.levels(single_model)
+EAT_frontier_levels(single_model)
 
 ## ----perf.single.output, collapse = FALSE-------------------------------------
-descriptiveEAT <- descrEAT(single_model)
-
-descriptiveEAT
+EAT_leaf_stats(single_model)
 
 ## ----node.charac, collapse = FALSE--------------------------------------------
 single_model[["tree"]][[5]]
 
 ## ----table2, echo = FALSE-----------------------------------------------------
-types <- data.frame("Variable" = c("Independent variables (inputs)", 
-                                   "Dependent variables (outputs)"),
+types <- data.frame("Variable" = c("Independent variables (inputs)", "Dependent variables (outputs)"),
                     "Integer" = c("x", "x"),
                     "Numeric" = c("x", "x"),
                     "Factor" = c("", ""),
@@ -125,6 +116,7 @@ PISAindex_factor_Continent$Continent <- as.factor(PISAindex_factor_Continent$Con
 ## ----GDP_PPP_category, collapse = FALSE---------------------------------------
 # Cateogirze GDP_PPP into 4 groups: Low, Medium, High, Very High.  
 PISAindex_GDP_PPP_cat <- PISAindex
+
 PISAindex_GDP_PPP_cat$GDP_PPP_cat <- cut(PISAindex_GDP_PPP_cat$GDP_PPP,
                                          breaks = c(0, 16.686, 31.419, 47.745, Inf),
                                          include.lowest = T,
@@ -141,8 +133,8 @@ class(PISAindex_GDP_PPP_cat$GDP_PPP_cat) # "ordered" "factor" --> correct
 
 ## ----categorized_model--------------------------------------------------------
 categorized_model <- EAT(data = PISAindex_GDP_PPP_cat, 
-                         x = c(15, 19), # input
-                         y = 3) # output
+                         x = c(15, 19), 
+                         y = 3) 
 
 ## ----frontier, eval = FALSE---------------------------------------------------
 #  frontier(object,
@@ -164,12 +156,12 @@ plot(frontier)
 
 ## ----single.output.max.depth, collapse = FALSE--------------------------------
 single_model_md <- EAT(data = PISAindex, 
-                       x = 15, # input 
-                       y = 3, # output
+                       x = 15,  
+                       y = 3,
                        max.leaves = 5) 
 
 ## ----size.single.output_md, collapse = FALSE----------------------------------
-size(single_model_md)
+EAT_size(single_model_md)
 
 ## ----pred.single.output_md, collapse = FALSE----------------------------------
 single_model_md[["model"]][["y"]]
@@ -182,8 +174,8 @@ plot(frontier_md)
 
 ## ----multioutput.scenario, collapse = FALSE-----------------------------------
 multioutput_model <- EAT(data = PISAindex, 
-                         x = 6:18, # input 
-                         y = 3:5 # output
+                         x = 6:18,  
+                         y = 3:5
                          ) 
 
 ## ----ranking, eval = FALSE----------------------------------------------------
@@ -203,8 +195,8 @@ rankingEAT(object = multioutput_model,
 
 ## ----model.graph1, collapse = FALSE-------------------------------------------
 reduced_model1 <- EAT(data = PISAindex, 
-                      x = c(6, 7, 8, 12, 17), # input
-                      y = 3:5, # output
+                      x = c(6, 7, 8, 12, 17), 
+                      y = 3:5, 
                       numStop = 9)
 
 ## ----graph1, fig.dim = c(8.4, 7.5)--------------------------------------------
@@ -215,8 +207,8 @@ plotEAT(object = reduced_model1)
 
 ## ----model.graph2, collapse = FALSE-------------------------------------------
 reduced_model2 <- EAT(data = PISAindex, 
-                      x = c(6, 7, 8, 12, 17), # input
-                      y = 3:5, # output
+                      x = c(6, 7, 8, 12, 17), 
+                      y = 3:5, 
                       numStop = 9,
                       max.depth = 5)
 
@@ -228,8 +220,8 @@ plotEAT(object = reduced_model2)
 
 ## ----model.graph3, collapse = FALSE-------------------------------------------
 reduced_model3 <- EAT(data = PISAindex, 
-                      x = c(6, 7, 8, 12, 17), # input
-                      y = 3:5, # output
+                      x = c(6, 7, 8, 12, 17), 
+                      y = 3:5, 
                       numStop = 9,
                       max.leaves = 4)
 
@@ -278,12 +270,11 @@ summary(bestEAT_model)
 #                score_model,
 #                digits = 3,
 #                FDH = TRUE,
+#                print.table = FALSE,
 #                na.rm = TRUE)
 
 ## ----scoresEAT, collapse = FALSE----------------------------------------------
-# single_model <- EAT(data = PISAindex, 
-                    # x = 15,
-                    # y = 3)
+# single_model <- EAT(data = PISAindex, x = 15, y = 3)
 
 scores_EAT <- efficiencyEAT(data = PISAindex,
                             x = 15, 
@@ -292,7 +283,10 @@ scores_EAT <- efficiencyEAT(data = PISAindex,
                             scores_model = "BCC.OUT",
                             digits = 3,
                             FDH = TRUE,
+                            print.table = TRUE,
                             na.rm = TRUE)
+
+scores_EAT
 
 ## ----scoresEAT2, collapse = FALSE---------------------------------------------
 scores_EAT2 <- efficiencyEAT(data = PISAindex,
@@ -302,7 +296,10 @@ scores_EAT2 <- efficiencyEAT(data = PISAindex,
                              scores_model = "BCC.INP",
                              digits = 3,
                              FDH = TRUE,
+                             print.table = FALSE,
                              na.rm = TRUE)
+
+scores_EAT2
 
 ## ----efficiencyCEAT, eval = FALSE---------------------------------------------
 #  efficiencyCEAT(data, x, y,
@@ -310,6 +307,7 @@ scores_EAT2 <- efficiencyEAT(data = PISAindex,
 #                 score_model,
 #                 digits = 3,
 #                 DEA = TRUE,
+#                 print.table = FALSE,
 #                 na.rm = TRUE)
 
 ## ----scoresCEAT, collapse = FALSE---------------------------------------------
@@ -320,7 +318,10 @@ scores_CEAT <- efficiencyCEAT(data = PISAindex,
                               scores_model = "BCC.INP",
                               digits = 3,
                               DEA = TRUE,
+                              print.table = TRUE,
                               na.rm = TRUE)
+
+scores_CEAT
 
 ## ----efficiency_jitter, eval = FALSE------------------------------------------
 #  efficiencyJitter(object, df_scores,
@@ -340,10 +341,8 @@ efficiencyJitter(object = single_model,
                  upb = 0.65)
 
 ## ----frontier_comparar, fig.width = 7.2, fig.height = 6, fig.align = 'center'----
-# frontier <- frontier(object = single_model,
-                     # FDH = TRUE, 
-                     # observed.data = TRUE,
-                     # rwn = TRUE)
+# frontier <- frontier(object = single_model, FDH = TRUE, 
+                     # observed.data = TRUE, rwn = TRUE)
 
 plot(frontier)
 
@@ -353,18 +352,15 @@ plot(frontier)
 #  
 
 ## ----density_single, collapse = FALSE, fig.width = 7.2, fig.height = 6, fig.align = 'center'----
-efficiencyDensity(df_scores = scores_EAT[, 3:4],
+efficiencyDensity(df_scores = scores_EAT,
                   model = c("EAT", "FDH"))
 
-efficiencyDensity(df_scores = scores_CEAT[, 3:4],
+efficiencyDensity(df_scores = scores_CEAT,
                   model = c("CEAT", "DEA"))
 
 
 ## ----cursed.scores, collapse = FALSE------------------------------------------
-# multioutput_model <- EAT(data = PISAindex, 
-                         # x = 6:18, 
-                         # y = 3:5
-                         # ) 
+# multioutput_model <- EAT(data = PISAindex, x = 6:18, y = 3:5) 
 
 cursed_scores <- efficiencyEAT(data = PISAindex,
                                x = 6:18, 
@@ -372,12 +368,11 @@ cursed_scores <- efficiencyEAT(data = PISAindex,
                                object = multioutput_model,
                                scores_model = "BCC.OUT",
                                digits = 3,
+                               print.table = TRUE,
                                FDH = TRUE)
 
 ## ----cursed.density, collapse = FALSE, fig.width = 7.2, fig.height = 6, fig.align = 'center'----
-efficiencyDensity(df_scores = cursed_scores[, 17:18],
-                  model = c("EAT", "FDH"))
-
+efficiencyDensity(df_scores = cursed_scores, model = c("EAT", "FDH"))
 
 ## ----RF, eval = FALSE---------------------------------------------------------
 #  RFEAT(data, x, y,
@@ -387,8 +382,8 @@ efficiencyDensity(df_scores = cursed_scores[, 17:18],
 
 ## ----RFmodel------------------------------------------------------------------
 forest <- RFEAT(data = PISAindex, 
-                x = 6:18, # input 
-                y = 3:5, # output
+                x = 6:18,
+                y = 3:5,
                 numStop = 5, 
                 m = 30,
                 s_mtry = "BRM",
@@ -453,31 +448,27 @@ bestRFEAT_model <- RFEAT(data = PISAindex,
 #  efficiencyRFEAT(data, x, y,
 #                  object,
 #                  digits = 2,
-#                  FDH = TRUE)
+#                  FDH = TRUE,
+#                  print.table = FALSE,
+#                  na.rm = TRUE)
 
 ## ----scores_RF----------------------------------------------------------------
 scoresRF <- efficiencyRFEAT(data = PISAindex,
-                            x = c(6, 7, 8, 12, 17), # input
-                            y = 3:5, # output
+                            x = c(6, 7, 8, 12, 17),
+                            y = 3:5,
                             object = bestRFEAT_model,
-                            FDH = TRUE)
+                            FDH = TRUE,
+                            print.table = TRUE)
 
 ## ----predict, eval = FALSE----------------------------------------------------
-#  predict(object, newdata, x)
+#  predict(object, newdata, x, ...)
 
 ## ----predictions, collapse = FALSE--------------------------------------------
-# bestEAT_model <- EAT(data = PISAindex,
-                     # x = c(6, 7, 8, 12, 17),
-                     # y = 3:5,
-                     # numStop = 5,
-                     # fold = 5)
+# bestEAT_model <- EAT(data = PISAindex, x = c(6, 7, 8, 12, 17), y = 3:5, 
+                     # numStop = 5, fold = 5)
 
-# bestRFEAT_model <- RFEAT(data = PISAindex,
-                         # x = c(6, 7, 8, 12, 17),
-                         # y = 3:5,
-                         # numStop = 3,
-                         # m = 30,
-                         # s_mtry = 'BRM')
+# bestRFEAT_model <- RFEAT(data = PISAindex, x = c(6, 7, 8, 12, 17), y = 3:5,
+                         # numStop = 3, m = 30, s_mtry = 'BRM')
 
 predictions_EAT <- predict(object = bestEAT_model,
                            newdata = PISAindex,
@@ -487,29 +478,27 @@ predictions_RFEAT <- predict(object = bestRFEAT_model,
                              newdata = PISAindex,
                              x = c(6, 7, 8, 12, 17))
 
-## ----EAT_vs_RFEAT_vs_FDH, collapse = FALSE, echo = FALSE----------------------
-predictions <- cbind(PISAindex[, 3], PISAindex[, 4], PISAindex[, 5], 
-                     predictions_EAT[, 6], predictions_EAT[, 7], predictions_EAT[, 8],
-                     predictions_RFEAT[, 6], predictions_RFEAT[, 7], predictions_RFEAT[, 8]) %>%
-  as.data.frame()
+## ----EAT_vs_RFEAT, collapse = FALSE, echo = FALSE-----------------------------
 
-names(predictions) = c("S_PISA", "R_PISA", "M_PISA",
-                       "S_EAT", "R_EAT", "M_EAT",
-                       "S_RFEAT", "R_RFEAT", "M_RFEAT")
+predictions <- data.frame(
+  "S_PISA" = PISAindex[, 3],
+  "R_PISA" = PISAindex[, 4],
+  "M_PISA" = PISAindex[, 5],
+  "S_EAT" = predictions_EAT[, 1],
+  "R_EAT" = predictions_EAT[, 2],
+  "M_EAT" = predictions_EAT[, 3],
+  "S_RFEAT" = predictions_RFEAT[, 1],
+  "R_RFEAT" = predictions_RFEAT[, 2],
+  "M_RFEAT" = predictions_RFEAT[, 3]
+  ) 
 
 kableExtra::kable(predictions) %>%
-  kableExtra::kable_styling("striped", full_width = F) %>%
-  kableExtra::column_spec(c(1, 2, 3), background = "#DBFFD6") %>%
-  kableExtra::column_spec(c(4, 5, 6), background = "#FFFFD1") %>%
-  kableExtra::column_spec(c(7, 8, 9), background = "#FFCCF9")
+  kableExtra::kable_styling("striped", full_width = F)
 
 
 ## ----newDF, collapse = FALSE--------------------------------------------------
-new <- data.frame(NBMC = c(90, 95, 93),
-                  WS = c(87, 92, 99),
-                  S = c(93, 90, 90),
-                  HW = c(90, 91, 92),
-                  AAE = c(88, 91, 89))
+new <- data.frame(WS = c(87, 92, 99), S = c(93, 90, 90), NBMC = c(90, 95, 93),
+                  HW = c(90, 91, 92), AAE = c(88, 91, 89))
 
 predictions_EAT <- predict(object = bestEAT_model,
                            newdata = new,

@@ -1,6 +1,6 @@
 Package: eat
 Title: Efficiency Analysis Trees
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(
     person(given = "Miriam", 
            family = "Esteve", 
@@ -34,18 +34,18 @@ LazyData: true
 RoxygenNote: 7.1.2
 Imports: dplyr, conflicted, stats, ggplot2, ggparty, partykit, ggrepel,
         Rdpack, lpSolveAPI, utils, reshape2
-Suggests: rmarkdown, testthat, kableExtra, knitr, usethis, devtools
+Suggests: rmarkdown, testthat, knitr, kableExtra, usethis, devtools
 RdMacros: Rdpack
 VignetteBuilder: knitr
 Depends: R (>= 2.10)
 URL: https://efficiencytools.wordpress.com/
 BugReports: https://github.com/MiriamEsteve/EAT/issues
 NeedsCompilation: no
-Packaged: 2022-01-13 18:41:06 UTC; victo
+Packaged: 2022-01-15 20:29:22 UTC; victo
 Author: Miriam Esteve [cre, aut] (<https://orcid.org/0000-0002-5908-0581>),
   Víctor España [aut] (<https://orcid.org/0000-0002-1807-6180>),
   Juan Aparicio [aut] (<https://orcid.org/0000-0002-0867-0004>),
   Xavier Barber [aut] (<https://orcid.org/0000-0003-3079-5855>)
 Maintainer: Miriam Esteve <mestevecampello@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-01-14 09:22:45 UTC
+Date/Publication: 2022-01-16 00:02:42 UTC

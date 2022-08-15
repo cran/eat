@@ -6,9 +6,9 @@
 #' 
 #' @author 
 #' \strong{Mantainers}: \itemize{
-#' \item{Miriam Esteve Campello \email{miriam.estevec@@umh.es}}
+#' \item{Miriam Esteve Campello \email{mestevecampello@@gmail.es}}
 #' \item{Víctor Javier España Roch}
-#' } \cr
+#' }
 #' Authors:
 #' \itemize{
 #' \item{Miriam Esteve Campello}
@@ -23,8 +23,7 @@
 #' @keywords internal  
 #' 
 #' @seealso 
-#' Github: \url{https://github.com/MiriamEsteve/EAT} \cr
-#' \cr
+#' Github: \url{https://github.com/MiriamEsteve/EAT}
 #' \insertRef{esteve2020}{eat}
 #' 
 "_PACKAGE"

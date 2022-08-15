@@ -10,11 +10,11 @@
 #' 
 #' @return Plot object with the following elements for each node:
 #' \itemize{
-#' \item{id}: node index.
-#' \item{R}: error at the node.
-#' \item{n(t)}: number of observations at the node.
-#' \item{an input name}: splitting variable.
-#' \item{y}: output prediction.
+#' \item{id: node index.}
+#' \item{R: error at the node.}
+#' \item{n(t): number of observations at the node.}
+#' \item{an input name: splitting variable.}
+#' \item{y: output prediction.}
 #' }
 #' 
 #' @examples 
@@ -159,7 +159,7 @@ plotEAT <- function(object) {
 #'
 #' @description This function modifies the coordinates of the nodes in the plotEAT function to overcome overlapping.
 #'
-#' @param py a party object.
+#' @param py A party object.
 #'
 #' @importFrom ggparty ggparty
 #'

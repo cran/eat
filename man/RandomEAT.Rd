@@ -7,18 +7,18 @@
 RandomEAT(data, x, y, numStop, s_mtry)
 }
 \arguments{
-\item{data}{Dataframe containing the training set.}
+\item{data}{\code{data.frame} containing the training set.}
 
 \item{x}{Vector. Column input indexes in data.}
 
 \item{y}{Vector. Column output indexes in data.}
 
-\item{numStop}{Integer. Minimum number of observations in a node for a split to be attempted.}
+\item{numStop}{Minimum number of observations in a node for a split to be attempted.}
 
 \item{s_mtry}{Number of variables randomly sampled as candidates at each split. The available options are: \code{"BRM"}, \code{"DEA1"}, \code{"DEA2"}, \code{"DEA3"}, \code{"DEA4"} or any integer.}
 }
 \value{
-List of m trees in forest and the error that will be used in the ranking of the importance of the variables.
+A \code{list} of m trees in forest and the error that will be used in the ranking of the importance of the variables.
 }
 \description{
 This function builds an individual tree for Random Forest

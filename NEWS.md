@@ -29,3 +29,8 @@ Bug fixes:
 - Now, `efficiencyEAT()`, `efficiencyCEAT()` and `efficiencyRFEAT` only return the efficiency scores.
 
 - Now, `predict()` only returns predictions.
+
+# eat 0.1.3
+
+- Upgrade eat package to be supported by the updates of the packages it depends on.
+

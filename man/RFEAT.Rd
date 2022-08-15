@@ -46,9 +46,9 @@ A \code{RFEAT} object containing:
                         \item{\code{s_mtry}}: s_mtry hyperparameter value.
                         \item{\code{na.rm}}: na.rm hyperparameter value.}
        }
-  \item{\code{forest}: list structure containing the individual EAT models.}
+  \item{\code{forest}: \code{list} containing the individual EAT models.}
   \item{\code{error}: Out-of-Bag error at the forest.}   
-  \item{\code{OOB}: list containing Out-of-Bag set for each tree.}
+  \item{\code{OOB}: \code{list} containing Out-of-Bag set for each tree.}
 }
 }
 \description{

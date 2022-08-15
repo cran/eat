@@ -7,7 +7,7 @@
 layout(py)
 }
 \arguments{
-\item{py}{a party object.}
+\item{py}{A party object.}
 }
 \value{
 Dataframe with suitable modifications of the node layout.

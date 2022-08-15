@@ -27,13 +27,13 @@ efficiencyEAT(
 
 \item{scores_model}{Mathematical programming model to calculate scores. 
 \itemize{
-\item{\code{BCC.OUT}} BCC model. Output-oriented. Efficiency level at 1.
-\item{\code{BCC.INP}}  BCC model. Input-oriented. Efficiency level at 1.
-\item{\code{DDF}}     Directional Distance Function. Efficiency level at 0.
-\item{\code{RSL.OUT}} Russell model. Output-oriented. Efficiency level at 1.
-\item{\code{RSL.INP}}  Russell model. Input-oriented. Efficiency level at 1.
-\item{\code{WAM.MIP}} Weighted Additive Model. Measure of Inefficiency Proportions. Efficiency level at 0.
-\item{\code{WAM.RAM}} Weighted Additive Model. Range Adjusted Measure of Inefficiency. Efficiency level at 0.
+\item{\code{BCC.OUT} BCC model. Output-oriented. Efficiency level at 1.}
+\item{\code{BCC.INP}  BCC model. Input-oriented. Efficiency level at 1.}
+\item{\code{DDF}     Directional Distance Function. Efficiency level at 0.}
+\item{\code{RSL.OUT} Russell model. Output-oriented. Efficiency level at 1.}
+\item{\code{RSL.INP}  Russell model. Input-oriented. Efficiency level at 1.}
+\item{\code{WAM.MIP} Weighted Additive Model. Measure of Inefficiency Proportions. Efficiency level at 0.}
+\item{\code{WAM.RAM} Weighted Additive Model. Range Adjusted Measure of Inefficiency. Efficiency level at 0.}
 }}
 
 \item{digits}{Decimal units for scores.}

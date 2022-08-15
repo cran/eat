@@ -6,13 +6,13 @@
 #' @param df_scores \code{data.frame} with efficiency scores (from \code{efficiencyEAT} or \code{efficiencyCEAT}).
 #' @param scores_model Mathematical programming model to calculate scores. 
 #' \itemize{
-#' \item{\code{BCC.OUT}} BCC model. Output-oriented.
-#' \item{\code{BCC.INP}}  BCC model. Input-oriented.
-#' \item{\code{DDF}}     Directional Distance Function.
-#' \item{\code{RSL.OUT}} Russell model. Output-oriented.
-#' \item{\code{RSL.INP}}  Russell model. Input-oriented.
-#' \item{\code{WAM.MIP}} Weighted Additive Model. Measure of Inefficiency Proportions.
-#' \item{\code{WAM.RAM}} Weighted Additive Model. Range Adjusted Measure of Inefficiency.
+#' \item{\code{BCC.OUT} BCC model. Output-oriented.}
+#' \item{\code{BCC.INP}  BCC model. Input-oriented.}
+#' \item{\code{DDF}     Directional Distance Function.}
+#' \item{\code{RSL.OUT} Russell model. Output-oriented.}
+#' \item{\code{RSL.INP}  Russell model. Input-oriented.}
+#' \item{\code{WAM.MIP} Weighted Additive Model. Measure of Inefficiency Proportions.}
+#' \item{\code{WAM.RAM} Weighted Additive Model. Range Adjusted Measure of Inefficiency.}
 #' }
 #' @param upb Numeric. Upper bound for labeling.
 #' @param lwb Numeric. Lower bound for labeling.

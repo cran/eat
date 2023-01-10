@@ -1,4 +1,4 @@
-4de35e979a5537fda02fcc0f79885caf *DESCRIPTION
+d6f6131e61b9752690711bb81158a43f *DESCRIPTION
 c9f44ab97e73a0ff485842b8381170fd *NAMESPACE
 7447ca8aa3545798232e9cee6296348b *NEWS.md
 7ece0f3c8d846ab8a451c63b13054678 *R/EAT.R
@@ -10,7 +10,7 @@ ec0f91f1fd4daced3bc9b93123636508 *R/alpha.R
 dbc105de807a6ea127b3711b2cec548e *R/checkEAT.R
 a4a0ec02ef2effa75c7df13c563452ef *R/eat_pkg.R
 abd05e4c0bb7ea570c4c46ea881b86e7 *R/efficiencyCEAT.R
-b2da94b1835c6a6b8fbfd267027dfdd0 *R/efficiencyEAT.R
+c77a17ae998340bf8b756c821e317ef2 *R/efficiencyEAT.R
 f8b72cfaed8d9ed85c094ba55a463401 *R/efficiencyRFEAT.R
 65118d25463cbb1462d947f703be74b7 *R/efficiency_plots.R
 78c10271934ec21b9a9c1572ab7756df *R/frontier.R
@@ -31,13 +31,13 @@ ed588ea159163dd99be413021741e87f *R/selectTk.R
 e8f4ebb7d0c2cb3390d1c40ac6c23b76 *R/treesForRCV.R
 cb65a7c3564e080873f455a155199683 *R/userPredictions.R
 b98e75fdd561cb35c5b5b2a47494d4a3 *README.md
-f9a1d2329971cac970be7cd7c877caa2 *build/partial.rdb
-c7efb36dad750f2e14e15bee28717620 *build/vignette.rds
+6de5916f77126594780966e5b6a126d2 *build/partial.rdb
+6053842447167a30e60031713df71981 *build/vignette.rds
 c1453e6434bd2ffb91948dd0fd454c81 *data/PISAindex.rda
 f8f6838625c27628b52389158e80e38a *inst/REFERENCES.bib
 3fa21fe7281b106609c7fb65d706608f *inst/doc/EAT.R
 cf02f5be2aff0dd2620d9bcd4c042afa *inst/doc/EAT.Rmd
-7dce9835836cfed99099860ce375c8a6 *inst/doc/EAT.html
+ff73a9f1c84f16d9bc349f03d65192bb *inst/doc/EAT.html
 3fdae8b503539ac173964d74e64da3d4 *man/CEAT_BCC_in.Rd
 47468d4e5ce31c97c2e93c4da26297ae *man/CEAT_BCC_out.Rd
 69b4f58aeae06753b0b5a2509b4ea38c *man/CEAT_DDF.Rd

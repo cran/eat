@@ -203,6 +203,9 @@ EAT_RSL_in <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves) 
     # Constrain 2.4
     set.type(lps, columns = 1:N_leaves + nX, type = c("binary"))
     
+    # Constraint 2.5 -phi_m >= 1
+    set.bounds(lps, columns = 1:nY, lower = rep(0, nY), upper=rep(1, nY))
+    
     solve(lps)
     scores[d, ] <- get.objective(lps)
   }
@@ -260,6 +263,10 @@ EAT_RSL_out <- function(j, scores, x_k, y_k, atreeTk, ytreeTk, nX, nY, N_leaves)
     
     # Constrain 2.4
     set.type(lps, columns = 1:N_leaves + nY, type = c("binary"))
+    
+    
+    # Constraint 2.5 -phi_m >= 1
+    set.bounds(lps, columns = 1:nY, lower = rep(1,nY), upper=rep(Inf, nY))
     
     solve(lps)
     scores[d, ] <- get.objective(lps)
